@@ -1,5 +1,4 @@
 from encuesta import Encuesta
-from listado_respuestas import ListadoRespuestas
 
 
 class Usuario:
@@ -27,6 +26,4 @@ class Usuario:
                 except ValueError:
                     print("Por favor, ingrese un número válido.")
             respuestas.append(respuesta - 1)  # Guardamos la opción seleccionada, ajustando a índice 0
-        listado_respuestas = ListadoRespuestas(usuario=self, respuestas=respuestas)
-        encuesta.agregar_listado_respuestas(listado_respuestas)
 

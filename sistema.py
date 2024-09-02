@@ -26,3 +26,5 @@ usuario.contestar_encuesta(encuesta)
 # Verificar que las respuestas se guardaron
 for respuesta in encuesta.listado_respuestas:
     print(f"Usuario: {respuesta.usuario.correo}, Respuestas: {respuesta.respuestas}")
+
+
