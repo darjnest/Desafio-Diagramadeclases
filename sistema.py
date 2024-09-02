@@ -20,5 +20,9 @@ usuario = Usuario(correo="usuario@example.com", edad=25, region=1)
 # Mostrar la encuesta
 print(encuesta.mostrar())
 
-# El usuario contesta la encuesta (lógica de implementación requerida)
+# El usuario contesta la encuesta
 usuario.contestar_encuesta(encuesta)
+
+# Verificar que las respuestas se guardaron
+for respuesta in encuesta.listado_respuestas:
+    print(f"Usuario: {respuesta.usuario.correo}, Respuestas: {respuesta.respuestas}")

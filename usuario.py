@@ -1,25 +1,32 @@
+from encuesta import Encuesta
+from listado_respuestas import ListadoRespuestas
+
+
 class Usuario:
     def __init__(self, correo: str, edad: int, region: int):
-        """
-        Constructor de la clase Usuario.
-
-        Inicializa una instancia de Usuario, que representa a un usuario de la encuesta.
-
-        :param correo: (str) La dirección de correo electrónico del usuario.
-        :param edad: (int) La edad del usuario.
-        :param region: (int) El identificador de la región en la que se encuentra el usuario.
-        """
-        self.correo = correo  # Almacena la dirección de correo electrónico del usuario.
-        self.edad = edad  # Almacena la edad del usuario.
-        self.region = region  # Almacena el identificador de la región del usuario.
+        self.correo = correo
+        self.edad = edad
+        self.region = region
 
     def contestar_encuesta(self, encuesta: Encuesta):
         """
         Método para que el usuario conteste una encuesta.
 
-        Este método será implementado para permitir que el usuario responda a las preguntas de la encuesta.
+        Permite al usuario seleccionar respuestas a las preguntas de la encuesta
+        y almacena las respuestas en el listado de respuestas de la encuesta.
 
         :param encuesta: (Encuesta) La encuesta que el usuario va a contestar.
         """
-        pass  # Este método será implementado en el futuro.
+        respuestas = []
+        for pregunta in encuesta.preguntas:
+            print(pregunta.mostrar())  # Muestra la pregunta y sus alternativas
+            respuesta = None
+            while respuesta not in range(1, len(pregunta.alternativas) + 1):
+                try:
+                    respuesta = int(input("Selecciona una opción (número): "))
+                except ValueError:
+                    print("Por favor, ingrese un número válido.")
+            respuestas.append(respuesta - 1)  # Guardamos la opción seleccionada, ajustando a índice 0
+        listado_respuestas = ListadoRespuestas(usuario=self, respuestas=respuestas)
+        encuesta.agregar_listado_respuestas(listado_respuestas)
 
