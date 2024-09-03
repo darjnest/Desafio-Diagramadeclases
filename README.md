@@ -29,26 +29,41 @@ from alternativa import Alternativa
 from pregunta import Pregunta
 from encuesta import Encuesta
 from usuario import Usuario
-from listado_respuestas import ListadoRespuestas
 
-# Crear alternativas
-alt1 = Alternativa(contenido="Sí")
-alt2 = Alternativa(contenido="No")
+def main():
+    # Crear algunas alternativas de ejemplo
+    alternativa1 = Alternativa("C#")
+    alternativa2 = Alternativa("Java")
+    alternativa3 = Alternativa("Python")
 
-# Crear una pregunta con alternativas
-pregunta = Pregunta(enunciado="¿Te gusta el café?", es_requerida=True, alternativas=[alt1, alt2])
+    # Crear una lista de alternativas para una pregunta
+    alternativas_pregunta1 = [alternativa1, alternativa2, alternativa3]
 
-# Crear una encuesta con preguntas
-encuesta = Encuesta(nombre="Encuesta de Café", preguntas=[pregunta])
+    # Crear una instancia de Pregunta con todos los argumentos necesarios
+    pregunta1 = Pregunta(
+        enunciado="¿Cuál es tu lenguaje de programación favorito?",
+        es_requerida=True,
+        alternativas=alternativas_pregunta1,
+        ayuda="Elige tu lenguaje preferido de la lista."
+    )
 
-# Crear un usuario
-usuario = Usuario(correo="usuario@example.com", edad=25, region=1)
+    # Crear una instancia de Encuesta con una lista de preguntas
+    encuesta = Encuesta(
+        titulo="Encuesta de Programación",
+        preguntas=[pregunta1]
+    )
 
-# Mostrar la encuesta
-print(encuesta.mostrar())
+    # Crear un usuario y contestar la encuesta
+    usuario = Usuario(correo="test@example.com", edad=30, region=1)
+    usuario.contestar_encuesta(encuesta)
 
-# El usuario contesta la encuesta (lógica de implementación requerida)
-usuario.contestar_encuesta(encuesta)
+    # Mostrar las respuestas del usuario al finalizar
+    usuario.mostrar_respuestas()
+
+if __name__ == "__main__":
+    main()
+
+
 
 
 Contribuciones
