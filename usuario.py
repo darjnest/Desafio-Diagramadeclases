@@ -26,4 +26,3 @@ class Usuario:
                 except ValueError:
                     print("Por favor, ingrese un número válido.")
             respuestas.append(respuesta - 1)  # Guardamos la opción seleccionada, ajustando a índice 0
-
