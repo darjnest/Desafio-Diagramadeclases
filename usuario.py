@@ -1,28 +1,44 @@
-from encuesta import Encuesta
 
+
+from encuesta import Encuesta
 
 class Usuario:
     def __init__(self, correo: str, edad: int, region: int):
+        """
+        Constructor de la clase Usuario.
+        
+        Inicializa un usuario con su correo, edad y región.
+        
+        :param correo: (str) Correo electrónico del usuario.
+        :param edad: (int) Edad del usuario.
+        :param region: (int) Región del usuario.
+        """
         self.correo = correo
         self.edad = edad
         self.region = region
+        self.respuestas = {}  # Diccionario para almacenar las respuestas del usuario
 
     def contestar_encuesta(self, encuesta: Encuesta):
         """
-        Método para que el usuario conteste una encuesta.
-
-        Permite al usuario seleccionar respuestas a las preguntas de la encuesta
-        y almacena las respuestas en el listado de respuestas de la encuesta.
-
-        :param encuesta: (Encuesta) La encuesta que el usuario va a contestar.
+        Permite al usuario contestar una encuesta.
+        
+        :param encuesta: (Encuesta) La encuesta a ser contestada.
         """
-        respuestas = []
+        print(f"\nUsuario: {self.correo}")
+        print(f"Edad: {self.edad}, Región: {self.region}\n")
+        print(f"Comenzando la encuesta: {encuesta.titulo}\n")
+
+        # Iterar sobre las preguntas de la encuesta y obtener las respuestas del usuario
         for pregunta in encuesta.preguntas:
-            print(pregunta.mostrar())  # Muestra la pregunta y sus alternativas
-            respuesta = None
-            while respuesta not in range(1, len(pregunta.alternativas) + 1):
-                try:
-                    respuesta = int(input("Selecciona una opción (número): "))
-                except ValueError:
-                    print("Por favor, ingrese un número válido.")
-            respuestas.append(respuesta - 1)  # Guardamos la opción seleccionada, ajustando a índice 0
+            print(pregunta.mostrar())
+            respuesta = input("Tu respuesta: ")
+            self.respuestas[pregunta.enunciado] = respuesta  # Guardar la respuesta en el diccionario
+
+    def mostrar_respuestas(self):
+        """
+        Muestra las respuestas del usuario a la encuesta.
+        """
+        print(f"\nRespuestas del usuario {self.correo}:")
+        for pregunta, respuesta in self.respuestas.items():
+            print(f"{pregunta}: {respuesta}")
+
